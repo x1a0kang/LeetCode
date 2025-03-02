@@ -3,7 +3,7 @@ import java.util.*;
 public class GroupAnagrams {
     public static void main(String[] args) {
         String[] strList = {"eat", "tea", "tan", "ate", "nat", "bat"};
-        List<List<String>> lists = groupAnagrams(strs);
+        List<List<String>> lists = groupAnagrams(strList);
         lists.forEach(System.out::println);
     }
 
