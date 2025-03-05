@@ -1,6 +1,7 @@
 public class ListNode {
     int val;
     ListNode next;
+    ListNode random;
 
     ListNode(int x) {
         val = x;
@@ -26,5 +27,13 @@ public class ListNode {
 
     public void setNext(ListNode next) {
         this.next = next;
+    }
+
+    public ListNode getRandom() {
+        return random;
+    }
+
+    public void setRandom(ListNode random) {
+        this.random = random;
     }
 }
