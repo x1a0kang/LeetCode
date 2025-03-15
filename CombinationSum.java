@@ -8,11 +8,11 @@ public class CombinationSum {
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
         res = new ArrayList<>();
         path = new ArrayList<>();
-        dps(candidates, target, 0);
+        dfs(candidates, target, 0);
         return res;
     }
 
-    public static void dps(int[] candidates, int target, int start) {
+    public static void dfs(int[] candidates, int target, int start) {
         if (target <= 0) {
             if (target == 0) {
                 res.add(new ArrayList<>(path));
@@ -21,7 +21,7 @@ public class CombinationSum {
         }
         for (int i = start; i < candidates.length; i++) {
             path.add(candidates[i]);
-            dps(candidates, target - candidates[i], i);
+            dfs(candidates, target - candidates[i], i);
             path.removeLast();
         }
     }
