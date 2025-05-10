@@ -1,33 +1,33 @@
 public class SearchRotateOrderList {
+    // 原则是判断哪边是递增的，检查递增范围的左右边界，如果target在该范围内，则选择递增的一边，反之取另外一边
     public static int search(int[] nums, int target) {
-        // 先找到旋转的点，也就是找到数组中的最小值
-        int minIndex = findMin(nums);
-        int res;
-        // 判断target在最小值的左边还是右边，再用二分法定位
-        if (target >= nums[minIndex] && target <= nums[nums.length - 1]) {
-            res = findTarget(nums, target, minIndex, nums.length - 1);
-        } else {
-            res = findTarget(nums, target, 0, minIndex - 1);
-        }
-        return res;
-    }
-
-    // 总体原则是，旋转后，右半部分的最大值是小于左半部分的最小值的
-    // 所以如果中点的值大于右边，说明中点左边的数全部都大于最小值，最小值在中点右边，且左边界可以跳过中点
-    // 如果中点的值小于右边，说明中点右边的数全部大于最小值，最小值在中点左边，但当前数可能就是最小值，所以右边界不能跳过中点
-    public static int findMin(int[] nums) {
         int left = 0, right = nums.length - 1;
         while (left < right) {
             int mid = left + (right - left) / 2;
-            if (nums[mid] < nums[right]) {
-                // 右边界不能跳过中点
-                right = mid;
-            } else {
-                // 左边界可以跳过中点
-                left = mid + 1;
+            // 如果mid大于right，说明右侧是非递增的，左侧是递增的
+            if (nums[mid] > nums[right]) {
+                // 判断是否在左侧递增区间内，在则直接查找
+                if (nums[left] <= target && target <= nums[mid]) {
+                    return findTarget(nums, target, left, mid);
+                }
+                // 不在则更新左边界
+                else {
+                    left = mid + 1;
+                }
+            }
+            // 如果mid小于right，说明右侧是递增的，左侧是非递增的
+            else {
+                // 判断是否在右侧递增区间内，在则直接查找
+                if (nums[mid] <= target && target <= nums[right]) {
+                    return findTarget(nums, target, mid, right);
+                }
+                // 不在则更新右边界
+                else {
+                    right = mid;
+                }
             }
         }
-        return left;
+        return nums[left] == target ? left : -1;
     }
 
     // 二分法查找target是否存在
@@ -46,7 +46,7 @@ public class SearchRotateOrderList {
     }
 
     public static void main(String[] args) {
-        int[] nums = new int[]{3, 1};
+        int[] nums = new int[]{1, 3};
         System.out.println(search(nums, 3));
     }
 }
