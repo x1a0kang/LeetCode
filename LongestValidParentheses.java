@@ -7,6 +7,7 @@ public class LongestValidParentheses {
         System.out.println(longestValidParentheses.longestValidParentheses(")()())"));
     }
 
+    // 最关键的是想到在栈内保存数组的下标，而不是括号
     public int longestValidParentheses(String s) {
         Deque<Integer> stack = new ArrayDeque<>();
         char[] charArray = s.toCharArray();
