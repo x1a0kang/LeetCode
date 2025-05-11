@@ -34,4 +34,38 @@ public class LongestValidParentheses {
         }
         return res;
     }
+
+    // 动态规划分两种情况
+    public int longestValidParenthesesDp(String s) {
+        if (s.length() <= 1) {
+            return 0;
+        }
+        char[] charArray = s.toCharArray();
+        int[] dp = new int[charArray.length];
+        char temp;
+        dp[0] = 0;
+        int res = 0;
+        for (int i = 1; i < charArray.length; i++) {
+            temp = charArray[i];
+            if (temp == ')') {
+                if (charArray[i - 1] == '(') {
+                    // 左括号(的前一个位置的值加2
+                    dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
+                } else {
+                    // 如果前一个是右括号，要看前一个右括号的左括号位置是不是左括号
+                    int lastLeftBracket = i - dp[i - 1] - 1;
+                    if (lastLeftBracket >= 0 && charArray[lastLeftBracket] == '(') {
+                        // 等于dp前一个右括号的值，加上dp前一个右括号的左括号的前一个位置的值，再加上2
+                        if (lastLeftBracket - 1 >= 0) {
+                            dp[i] = dp[i - 1] + dp[lastLeftBracket - 1] + 2;
+                        } else {
+                            dp[i] = dp[i - 1] + 2;
+                        }
+                    }
+                }
+                res = Math.max(res, dp[i]);
+            }
+        }
+        return res;
+    }
 }
