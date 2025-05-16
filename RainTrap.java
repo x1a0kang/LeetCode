@@ -1,12 +1,39 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class RainTrap {
     public static void main(String[] args) {
-        int[] nums = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int i = trap(nums);
+        int[] nums = {4,2,0,3,2,5};
+        RainTrap trap = new RainTrap();
+        int i = trap.rainTrap(nums);
         System.out.println(i);
     }
 
+    // 核心是单调栈，栈内保存的是下标
+    public int rainTrap(int[] height) {
+        int res = 0;
+        Deque<Integer> stack = new ArrayDeque<>();
+        int temp;
+        int h;
+        for (int i = 0; i < height.length; i++) {
+            // 栈内保持递增，注意这里是大于等于，相等的也弹出，否则在后续计算时会麻烦
+            while (!stack.isEmpty() && height[i] >= height[stack.peek()]) {
+                temp = stack.pop();
+                // 可能遇到最左边，最左边无法储存雨水，直接跳出
+                if (stack.isEmpty()) {
+                    break;
+                }
+                // 计算高度，取左右两边的较小值，减去弹出元素的高度，如果前面弹出的是相等的，这里高度会是0，对面积没有影响
+                h = Math.min(height[i], height[stack.peek()]) - height[temp];
+                res += h * (i - stack.peek() - 1);
+            }
+            stack.push(i);
+        }
+        return res;
+    }
+
     // 一层一层计算
-    public static int trap(int[] height) {
+    public int trap(int[] height) {
         int left = 0;
         int right = height.length - 1;
         int sum = 0;
