@@ -3,7 +3,7 @@ import java.util.Deque;
 
 public class RainTrap {
     public static void main(String[] args) {
-        int[] nums = {4,2,0,3,2,5};
+        int[] nums = {4, 2, 0, 3, 2, 5};
         RainTrap trap = new RainTrap();
         int i = trap.rainTrap(nums);
         System.out.println(i);
@@ -39,6 +39,7 @@ public class RainTrap {
         int sum = 0;
         int base = 0;
         while (left < right) {
+            // 先找到左右边界，左右比base矮的存不了水
             if (height[left] <= base) {
                 left++;
                 continue;
@@ -47,16 +48,22 @@ public class RainTrap {
                 right--;
                 continue;
             }
+            // 算出本层的高度，左右取更小的那个，减去base
             int min = Math.min(height[left], height[right]) - base;
+            // 总面积就是高度乘以左右间的距离
             int total = min * (right - left - 1);
+            // 再用总面积减去墙占用的面积，就是base层存水的面积
             for (int i = left + 1; i < right; i++) {
+                // 如果当前位置高度减去层数，小于本层的高度，说明低于水平线，甚至低于层数，所以取其和0的更大值
                 if (height[i] - base < min) {
                     total -= Math.max(height[i] - base, 0);
                 } else {
                     total -= min;
                 }
             }
+            // 总和加上本层的计算
             sum += total;
+            // 层数加上本层的高度
             base += min;
         }
         return sum;
