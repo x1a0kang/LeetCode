@@ -1,13 +1,13 @@
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class MinWindow {
     public static void main(String[] args) {
-        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        MinWindow minWindow = new MinWindow();
+        System.out.println(minWindow.minWindow("ADOBECODEBANC", "ABC"));
     }
 
-    public static String minWindow(String s, String t) {
+    public String minWindow(String s, String t) {
         if (t.length() > s.length() || t.isEmpty()) {
             return "";
         }
@@ -16,35 +16,35 @@ public class MinWindow {
         for (char c : t.toCharArray()) {
             tMap.put(c, tMap.getOrDefault(c, 0) + 1);
         }
-
+        char[] charArray = s.toCharArray();
         Map<Character, Integer> map = new HashMap<>();
-        LinkedList<Integer> list = new LinkedList<>();
         int left = 0;
         String res = "";
-        String temp;
+        // 左右指针表示滑动窗口的边界
         for (int right = 0; right < s.length(); right++) {
-            char c = s.charAt(right);
+            char c = charArray[right];
+            // 已有字符计数
             if (tMap.containsKey(c)) {
-                map.put(s.charAt(right), map.getOrDefault(s.charAt(right), 0) + 1);
-                list.add(right);
+                map.put(charArray[right], map.getOrDefault(charArray[right], 0) + 1);
             }
-
+            // 如果已有字符满足了目标字符串的要求，向左收缩边界
             while (check(tMap, map) && left <= right) {
-                temp = s.substring(left, right + 1);
-                if (res.isEmpty() || temp.length() < res.length()) {
-                    res = temp;
+                // 更新res
+                if (res.isEmpty() || res.length() > right - left + 1) {
+                    res = s.substring(left, right + 1);
                 }
-                char c1 = s.charAt(left);
+                // 收缩左边界，map中的计数更新
+                char c1 = charArray[left];
                 if (map.containsKey(c1)) {
                     map.put(c1, map.get(c1) - 1);
                 }
-                left = getLeft(left, list);
+                left++;
             }
         }
         return res;
     }
 
-    private static boolean check(Map<Character, Integer> tMap, Map<Character, Integer> map) {
+    private boolean check(Map<Character, Integer> tMap, Map<Character, Integer> map) {
         for (Map.Entry<Character, Integer> entry : tMap.entrySet()) {
             if (!map.containsKey(entry.getKey())) {
                 return false;
@@ -55,16 +55,5 @@ public class MinWindow {
             }
         }
         return true;
-    }
-
-    private static int getLeft(int left, LinkedList<Integer> list) {
-        while (!list.isEmpty()) {
-            Integer first = list.removeFirst();
-            if (first == left) {
-                continue;
-            }
-            return first;
-        }
-        return left + 1;
     }
 }
