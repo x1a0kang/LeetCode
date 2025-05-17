@@ -17,7 +17,7 @@ public class LengthOfLongestSubstring {
         Map<Character, Integer> map = new HashMap<>();
         for (int right = 0; right < charArray.length; right++) {
             // 如果当前字符在map中存在，并且位置大于left，left向右移动（因为map内的元素不删除，可能有在窗口之外的元素和窗口内的元素重复，这种不用管）
-            if (map.containsKey(charArray[right]) && map.get(charArray[right]) > left) {
+            if (map.containsKey(charArray[right]) && map.get(charArray[right]) >= left) {
                 left = map.get(charArray[right]) + 1;
             }
             map.put(charArray[right], right);
