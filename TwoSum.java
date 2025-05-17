@@ -7,6 +7,7 @@ public class TwoSum {
         Arrays.stream(ints).forEach(System.out::println);
     }
 
+    // 双指针，每次只从当前点往后，不会重复
     public static int[] twoSum(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
