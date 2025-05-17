@@ -12,6 +12,7 @@ public class MaxAreaWater {
         int left = 0;
         int right = height.length - 1;
         while (left < right) {
+            // 高是左右两个板之间短的那个，宽是左右之间的距离
             max = Math.max(max, Math.min(height[left], height[right]) * (right - left));
             if (height[left] < height[right]) {
                 left++;
@@ -22,6 +23,7 @@ public class MaxAreaWater {
         return max;
     }
 
+    // 暴力解法，每个位置都向后遍历
     public static int maxArea1(int[] height) {
         int max = 0;
         int temp;
