@@ -15,6 +15,7 @@ public class SortList {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode slow = dummy, fast = dummy;
+        // 先找到中点
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -22,9 +23,11 @@ public class SortList {
         fast = slow.next;
         slow.next = null;
 
+        // 然后左右两边递归
         ListNode left = sortList(head);
         ListNode right = sortList(fast);
 
+        // 左右两边合并
         ListNode cur = dummy;
         while (left != null && right != null) {
             if (left.val < right.val) {
