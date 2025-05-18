@@ -1,4 +1,5 @@
 public class RemoveNthFromEnd {
+    // 双指针间隔为N，然后删除
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
