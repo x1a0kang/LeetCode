@@ -31,18 +31,20 @@ public class MergeTwoLists {
     }
 
     public ListNode mergeTwoLists1(ListNode list1, ListNode list2) {
-        ListNode dum = new ListNode(0), cur = dum;
+        ListNode dum = new ListNode(0);
+        ListNode cur = dum;
         while (list1 != null && list2 != null) {
+            // 哪个小先连哪个
             if (list1.val < list2.val) {
                 cur.next = list1;
                 list1 = list1.next;
-            }
-            else {
+            } else {
                 cur.next = list2;
                 list2 = list2.next;
             }
             cur = cur.next;
         }
+        // 最后连上剩下的
         cur.next = list1 != null ? list1 : list2;
         return dum.next;
     }
