@@ -10,6 +10,7 @@ public class CopyRandomList {
         ListNode dummy = new ListNode(0);
         ListNode curNew = dummy;
         ListNode curOld = head;
+        // 用一个map维护新老节点的关系
         Map<ListNode, ListNode> map = new HashMap<>();
         while (curOld != null) {
             curNew.next = new ListNode(curOld.val);
@@ -20,6 +21,7 @@ public class CopyRandomList {
 
         curNew = dummy.next;
         curOld = head;
+        // 老节点的random找到新节点的random
         while (curNew != null) {
             curNew.random = map.get(curOld.random);
             curNew = curNew.next;
