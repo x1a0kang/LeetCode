@@ -4,14 +4,18 @@ public class SearchMatrix {
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
             return false;
         }
+        // 从右上角开始
         int i = 0, j = matrix[0].length - 1;
         while (i < matrix.length && j >= 0) {
             if (matrix[i][j] == target) {
                 return true;
             }
+            // 小于目标值就往下
             if (matrix[i][j] < target) {
                 i++;
-            } else {
+            }
+            // 大于目标值就往左
+            else {
                 j--;
             }
         }
