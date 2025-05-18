@@ -8,6 +8,7 @@ public class SpiralOrderMatrix {
         System.out.println(res);
     }
 
+    // 核心是用指针记录上下左右的边界
     public static List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> res = new ArrayList<>();
         if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
