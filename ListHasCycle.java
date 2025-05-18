@@ -1,4 +1,5 @@
 public class ListHasCycle {
+    // 核心原理快慢指针，快指针和慢指针相遇就是有环
     public boolean hasCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
