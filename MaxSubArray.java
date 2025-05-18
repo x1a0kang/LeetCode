@@ -22,4 +22,17 @@ public class MaxSubArray {
         }
         return max;
     }
+
+    // 核心原理：动态规划。如果前一个位置的最大和是小于0的，不要加上前一个位置，反之则加上
+    public int maxSubArrayDp(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int max = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            // i-1位置的最大和小于0，则不加，大于0则加
+            dp[i] = Math.max(dp[i - 1], 0) + nums[i];
+            max = Math.max(max, dp[i]);
+        }
+        return max;
+    }
 }
