@@ -50,11 +50,50 @@ public class RotateMatrix {
         int n = matrix.length;
         for (int i = 0; i < n / 2; i++) {
             for (int j = 0; j < (n + 1) / 2; j++) {
+                oneRound(matrix, i, j);
+            }
+        }
+    }
+
+    private void oneRound(int[][] matrix, int row, int col) {
+        int n = matrix.length;
+        // 记录前一个位置的数
+        int pre = matrix[row][col];
+        int temp;
+        int nextRow;
+        int nextCol;
+        for (int i = 0; i < 4; i++) {
+            // 计算下一个位置
+            nextRow = col;
+            nextCol = n - 1 - row;
+            // 常规swap流程，temp中间值
+            temp = matrix[nextRow][nextCol];
+            matrix[nextRow][nextCol] = pre;
+            pre = temp;
+            // 更新row，col
+            row = nextRow;
+            col = nextCol;
+        }
+    }
+
+    // 核心原理是先沿转置（沿对角线交换），再每行反转
+    public void rotate2(int[][] matrix) {
+        int n = matrix.length;
+        // 第一步：转置
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) { // 遍历对角线下方元素
                 int tmp = matrix[i][j];
-                matrix[i][j] = matrix[n - 1 - j][i];
-                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j];
-                matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i];
-                matrix[j][n - 1 - i] = tmp;
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = tmp;
+            }
+        }
+
+        // 第二步：行翻转
+        for (int[] row : matrix) {
+            for (int j = 0; j < n / 2; j++) { // 遍历左半元素
+                int tmp = row[j];
+                row[j] = row[n - 1 - j];
+                row[n - 1 - j] = tmp;
             }
         }
     }
