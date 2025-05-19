@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.Queue;
 
 public class RightSideViewTree {
-    // 层序遍历，每层取最后一个即可
+    // 核心原理是层序遍历，每层取最后一个即可
     public List<Integer> rightSideView(TreeNode root) {
         if (root == null) return new ArrayList<Integer>();
         List<Integer> res = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         int size;
         TreeNode temp;
