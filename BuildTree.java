@@ -7,10 +7,11 @@ public class BuildTree {
     private static Map<Integer, Integer> map;
 
     public static void main(String[] args) {
+        LevelOrderTree levelOrderTree = new LevelOrderTree();
         int[] preorder = {3, 9, 20, 15, 7};
         int[] inorder = {9, 3, 15, 20, 7};
         TreeNode root = buildTree(preorder, inorder);
-        List<List<Integer>> order = LevelOrderTree.levelOrder(root);
+        List<List<Integer>> order = levelOrderTree.levelOrder(root);
         System.out.println(Arrays.toString(order.toArray()));
     }
 
