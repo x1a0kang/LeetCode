@@ -7,6 +7,7 @@ public class IsValidBST {
         return isValid(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 
+    // 核心原理，不能仅通过left<root<right判断，否则可能在下层出现右子树的节点比左子树的节点小的情况，所以必须传入最大和最小值
     public boolean isValid(TreeNode root, long min, long max) {
         if (root == null) return true;
         if (root.val <= min || root.val >= max) return false;
