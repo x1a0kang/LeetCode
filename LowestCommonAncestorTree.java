@@ -43,6 +43,7 @@ public class LowestCommonAncestorTree {
 
     // 大神的方法
     public TreeNode another(TreeNode root, TreeNode p, TreeNode q) {
+        // 要想通的一点是，如果p在q的子树上，或者反过来，那先遇到的那个节点就是最近公共祖先，所以不需要再往下遍历
         if(root == null || root == p || root == q) return root;
         TreeNode left = another(root.left, p, q);
         TreeNode right = another(root.right, p, q);
