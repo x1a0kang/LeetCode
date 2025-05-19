@@ -1,28 +1,33 @@
 public class FlattenTree {
     public static void main(String[] args) {
+        FlattenTree ft = new FlattenTree();
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
         root.right = new TreeNode(5);
         root.left.left = new TreeNode(3);
         root.left.right = new TreeNode(4);
         root.right.right = new TreeNode(6);
-        flatten(root);
+        ft.flatten(root);
     }
 
-    public static void flatten(TreeNode root) {
+    // 核心原理是：左子树的最右节点，连接到右子树的第一个节点
+    public void flatten(TreeNode root) {
         if (root == null) return;
         flatten(root.left);
         flatten(root.right);
+        // 这个修改连接的操作必须在后面做，否则会影响遍历
         if (root.left != null) {
             // 找到左子树的最后一个节点
             TreeNode last = getLast(root.left);
+            // 左子树的最后一个节点，连接到右子树的第一个节点
             last.right = root.right;
             root.right = root.left;
             root.left = null;
         }
     }
 
-    private static TreeNode getLast(TreeNode root) {
+    // 找到最右节点
+    private TreeNode getLast(TreeNode root) {
         if (root == null) return null;
         TreeNode node = root;
         while (node.right != null) {
