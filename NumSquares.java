@@ -10,6 +10,7 @@ public class NumSquares {
         return dp[n];
     }
 
+    // 找到不大于n的最大完全平方数，n减去它再加1就是最少的情况，dp[i-j*j]+1
     public int getNum(int n, int[] dp) {
         int temp;
         int min = Integer.MAX_VALUE;
