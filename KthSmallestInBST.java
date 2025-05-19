@@ -1,9 +1,8 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class KthSmallestInBST {
     int k;
     int res;
+
+    // 核心原理是二叉搜索树的中序遍历是递增数组，第k小的数就是中序遍历的第k个数
     public int kthSmallest(TreeNode root, int k) {
         if (root == null) return -1;
         this.k = k;
