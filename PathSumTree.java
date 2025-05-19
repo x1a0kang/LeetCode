@@ -38,25 +38,30 @@ public class PathSumTree {
 
     // 前缀和方式，有数组类似题
     public int pathSumAnother(TreeNode root, int targetSum) {
-        Map<Long, Integer> prefix = new HashMap<Long, Integer>();
+        // 哈希表记录之前所有的前缀和，和出现的次数
+        Map<Long, Integer> prefix = new HashMap<>();
         prefix.put(0L, 1);
         return dfsAnother(root, prefix, 0, targetSum);
     }
 
-    public int dfsAnother(TreeNode root, Map<Long, Integer> prefix, long curr, int targetSum) {
+    public int dfsAnother(TreeNode root, Map<Long, Integer> prefix, long cur, int targetSum) {
         if (root == null) {
             return 0;
         }
 
-        int ret = 0;
-        curr += root.val;
+        int res;
+        // cur是当前的前缀和
+        cur += root.val;
+        // 用当前前缀和减target，如果差值在之前的前缀和里出现过，说明存在和为target的路径
+        res = prefix.getOrDefault(cur - targetSum, 0);
+        // 当前前缀和加入哈希表
+        prefix.put(cur, prefix.getOrDefault(cur, 0) + 1);
+        // 递归左右子节点
+        res += dfsAnother(root.left, prefix, cur, targetSum);
+        res += dfsAnother(root.right, prefix, cur, targetSum);
 
-        ret = prefix.getOrDefault(curr - targetSum, 0);
-        prefix.put(curr, prefix.getOrDefault(curr, 0) + 1);
-        ret += dfsAnother(root.left, prefix, curr, targetSum);
-        ret += dfsAnother(root.right, prefix, curr, targetSum);
-        prefix.put(curr, prefix.getOrDefault(curr, 0) - 1);
-
-        return ret;
+        // 这步很关键，当前前缀和减一，因为只能向下
+        prefix.put(cur, prefix.getOrDefault(cur, 0) - 1);
+        return res;
     }
 }
