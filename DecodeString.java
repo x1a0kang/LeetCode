@@ -6,10 +6,15 @@ import java.util.List;
 public class DecodeString {
     static Deque<String> stack = new ArrayDeque<>();
 
+    public static void main(String[] args) {
+        DecodeString decodeString = new DecodeString();
+        System.out.println(decodeString.decodeString("[abc][def]"));
+    }
+
     // 数字和字母公用了一个栈，也可以分开用两个，这里公用一个，栈的类型就要定为String
     // 很恶心的是如果直接把所有字符入栈，出来之后还要倒序，而StringBuilder并没有addFirst，所以要用list接收弹出的字符，再转成字符串
     // 核心思想就是所有的字符都要进栈再弹出，一个方括号内的字符弹出拼接好之后，再入栈，直到最后所有括号处理完毕后，弹出栈内所有字符，拼接成答案
-    public static String decodeString(String s) {
+    public String decodeString(String s) {
         // 处理数字，比如233这种大于一位的数字
         StringBuilder time = new StringBuilder();
         char[] charArray = s.toCharArray();
@@ -39,7 +44,7 @@ public class DecodeString {
         return getFromStack();
     }
 
-    public static String getFromStack() {
+    public String getFromStack() {
         List<String> list = new ArrayList<>();
         while (!stack.isEmpty()) {
             String pop = stack.pop();
@@ -57,15 +62,11 @@ public class DecodeString {
         return temp.repeat(time);
     }
 
-    public static String listToString(List<String> list) {
+    public String listToString(List<String> list) {
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
             sb.append(s);
         }
         return sb.toString();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(decodeString("[abc][def]"));
     }
 }
