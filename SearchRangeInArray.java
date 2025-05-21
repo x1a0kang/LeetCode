@@ -1,8 +1,15 @@
 import java.util.Arrays;
 
 public class SearchRangeInArray {
+    public static void main(String[] args) {
+        SearchRangeInArray searchRangeInArray = new SearchRangeInArray();
+        int[] nums = {2, 2};
+        int[] searchRange = searchRangeInArray.searchRange(nums, 2);
+        System.out.println(Arrays.toString(searchRange));
+    }
+
     // 想法是两边二分查找，分别找到左右边界，关键点在于第一次找到目标值时不要跳出循环，一直找到两个边界相遇为止
-    public static int[] searchRange(int[] nums, int target) {
+    public int[] searchRange(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return new int[]{-1, -1};
         }
@@ -44,14 +51,8 @@ public class SearchRangeInArray {
         return result;
     }
 
-    public static void main(String[] args) {
-        int[] nums = {2, 2};
-        int[] searchRange = searchRange(nums, 2);
-        System.out.println(Arrays.toString(searchRange));
-    }
-
     // 想法是先找到target，然后分别向左右移动找到边界。但是极端情况下，比如数组的所有值都是target，时间复杂度会来到On
-    public static int[] my(int[] nums, int target) {
+    public int[] my(int[] nums, int target) {
         if (nums == null || nums.length == 0)
             return new int[]{-1, -1};
         int start = 0;
