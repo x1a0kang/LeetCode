@@ -8,11 +8,13 @@ public class isValidBracket {
         char top;
         for (int i = 0; i < s.length(); i++) {
             c = s.charAt(i);
+            // 如果是左括号，直接入栈
             if (c == '(' || c == '{' || c == '[') {
                 stack.push(c);
             } else {
                 if (stack.isEmpty()) return false;
                 top = stack.pop();
+                // 如果是右括号，比较栈顶元素是否匹配
                 if (top == '(' && c == ')' || top == '{' && c == '}' || top == '[' && c == ']') {
                     continue;
                 }
