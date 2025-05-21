@@ -9,7 +9,7 @@ public class LargestRectangleArea {
         System.out.println(largestRectangleArea.largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
     }
 
-    // 核心是单调栈，栈内保存的是下标
+    // 核心是单调栈，栈内保存的是下标，每次弹出栈内比当前元素大的元素，因为如果当前元素更大，矩形的面积可以继续扩展
     public int largestRectangleArea(int[] heights) {
         Deque<Integer> stack = new ArrayDeque<>();
         List<Integer> list = init(heights);
