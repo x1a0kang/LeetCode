@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 
 public class DailyTemperatures {
+    // 核心原理是栈内保存元素的位置，每次比较当前温度和栈内温度的大小，小于当前温度的全部弹出，并计算位置的差值
     public int[] dailyTemperatures(int[] temperatures) {
         if (temperatures == null || temperatures.length == 0) {
             return new int[0];
