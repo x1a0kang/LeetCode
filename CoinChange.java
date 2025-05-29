@@ -2,10 +2,11 @@ import java.util.Arrays;
 
 public class CoinChange {
     public static void main(String[] args) {
-        System.out.println(coinChange(new int[]{2, 5, 10, 1}, 27));
+        CoinChange coinChange = new CoinChange();
+        System.out.println(coinChange.coinChange(new int[]{2, 5, 10, 1}, 27));
     }
 
-    public static int coinChange(int[] coins, int amount) {
+    public int coinChange(int[] coins, int amount) {
         if (amount == 0) return 0;
         if (coins.length == 0) return -1;
         int[] dp = new int[amount + 1];
@@ -19,7 +20,7 @@ public class CoinChange {
 
     // 找dp中目标amount减去当前面值的数，加1就是选当前面值的情况下需要的最少硬币数
     // 遍历所有面值的硬币，取最小硬币数
-    public static int getNum(int[] coins, int amount, int[] dp) {
+    public int getNum(int[] coins, int amount, int[] dp) {
         int temp;
         int min = Integer.MAX_VALUE;
         for (int coin : coins) {
