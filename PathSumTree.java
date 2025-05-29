@@ -49,6 +49,7 @@ public class PathSumTree {
             return 0;
         }
 
+        // res是出现的次数
         int res;
         // cur是当前的前缀和
         cur += root.val;
