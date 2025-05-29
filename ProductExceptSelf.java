@@ -2,12 +2,13 @@ import java.util.Arrays;
 
 public class ProductExceptSelf {
     public static void main(String[] args) {
-        int[] res = productExceptSelf(new int[]{1});
+        ProductExceptSelf p = new ProductExceptSelf();
+        int[] res = p.productExceptSelf(new int[]{1});
         System.out.println(Arrays.toString(res));
     }
 
     // 核心是三遍遍历，先求出每个位置左边的乘积，再求出右边的乘积，最后每个位置左右乘积相乘
-    public static int[] productExceptSelf(int[] nums) {
+    public int[] productExceptSelf(int[] nums) {
         if (nums.length == 0) return new int[0];
         if (nums.length == 1) return nums;
         int[] res = new int[nums.length];
