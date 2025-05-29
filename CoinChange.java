@@ -17,6 +17,8 @@ public class CoinChange {
         return dp[amount];
     }
 
+    // 找dp中目标amount减去当前面值的数，加1就是选当前面值的情况下需要的最少硬币数
+    // 遍历所有面值的硬币，取最小硬币数
     public static int getNum(int[] coins, int amount, int[] dp) {
         int temp;
         int min = Integer.MAX_VALUE;
