@@ -52,13 +52,16 @@ public class LongestValidParentheses {
                     // 左括号(的前一个位置的值加2
                     dp[i] = (i >= 2 ? dp[i - 2] : 0) + 2;
                 } else {
-                    // 如果前一个是右括号，要看前一个右括号的左括号位置是不是左括号
+                    // 如果前一个是右括号，要看前一个右括号的左括号的前一个位置是不是左括号，如果不是，dp[i]位置保持0
                     int lastLeftBracket = i - dp[i - 1] - 1;
                     if (lastLeftBracket >= 0 && charArray[lastLeftBracket] == '(') {
-                        // 等于dp前一个右括号的值，加上dp前一个右括号的左括号的前一个位置的值，再加上2
+                        // 如果前一个右括号的左括号前面还有值，要加上前面的值
                         if (lastLeftBracket - 1 >= 0) {
+                            // 等于dp前一个右括号的值，加上dp前一个右括号的左括号的前一个位置的值，再加上2
                             dp[i] = dp[i - 1] + dp[lastLeftBracket - 1] + 2;
-                        } else {
+                        }
+                        // 如果前一个右括号的左括号已经是字符串的开头，那就没有往前的必要了，直接在前一个dp的基础上加2
+                        else {
                             dp[i] = dp[i - 1] + 2;
                         }
                     }
