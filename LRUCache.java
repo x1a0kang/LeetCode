@@ -2,10 +2,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LRUCache {
-    private Map<Integer, DLinkedNode> cache = new HashMap<Integer, DLinkedNode>();
+    private Map<Integer, DLinkedNode> cache = new HashMap<>();
     private int size;
     private int capacity;
-    private DLinkedNode head, tail;
+    private DLinkedNode head;
+    private DLinkedNode tail;
 
     public LRUCache(int capacity) {
         this.size = 0;
