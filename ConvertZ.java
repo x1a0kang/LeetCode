@@ -19,7 +19,7 @@ public class ConvertZ {
         // 先把第一个字符加入第一行，因为后面的遍历过程不能包含第一个字符的情况
         list.getFirst().append(charArray[0]);
         while (i < charArray.length) {
-            // 从第1行开始向下填充，直到最后一列
+            // 从第一行开始向下填充，直到最后一列
             for (int j = 1; j < numRows; j++) {
                 if (i >= charArray.length) {
                     break;
@@ -28,7 +28,7 @@ public class ConvertZ {
                 stringBuilder.append(charArray[i]);
                 i++;
             }
-            // 从倒数第二列开始向上填充，直到第0行
+            // 从倒数第二列开始向上填充，直到第零行
             for (int j = numRows - 2; j >= 0; j--) {
                 if (i >= charArray.length) {
                     break;
