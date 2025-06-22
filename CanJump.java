@@ -5,11 +5,15 @@ public class CanJump {
         if (nums == null || nums.length == 0) {
             return false;
         }
-        if (nums.length == 1) return true;
+        if (nums.length == 1) {
+            return true;
+        }
         int end = nums.length - 1;
         int max = 0;
         for (int i = 0; i <= end; i++) {
-            if (i > max) return false;
+            if (i > max) {
+                return false;
+            }
             if (nums[i] + i >= end) {
                 return true;
             }
