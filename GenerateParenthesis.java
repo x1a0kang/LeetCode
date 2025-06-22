@@ -7,7 +7,7 @@ public class GenerateParenthesis {
 
     public static void main(String[] args) {
         GenerateParenthesis generateParenthesis = new GenerateParenthesis();
-        System.out.println(generateParenthesis.generateParenthesis(1));
+        System.out.println(generateParenthesis.generateParenthesis(3));
     }
 
     // 如果剩的左括号数和右括号相等，必须先放左括号
@@ -44,7 +44,7 @@ public class GenerateParenthesis {
             generate(left, right - 1);
         }
         // 递归结束后删除最后一个字符
-        sb.deleteCharAt(sb.length() - 1);
+//        sb.deleteCharAt(sb.length() - 1);
     }
 }
 
